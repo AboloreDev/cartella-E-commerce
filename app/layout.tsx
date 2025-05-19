@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/code/Header";
 import Footer from "@/components/code/Footer";
 import { ThemeProvider } from "next-themes";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Cartella Store",
@@ -15,14 +16,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="nunito antialiased bg-white dark:bg-black text-black dark:text-white transition-all duration-300">
-        <ThemeProvider attribute="class" enableSystem defaultTheme="system">
-          <Header />
-          {children}
-          <Footer />
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className="nunito antialiased bg-white dark:bg-black text-black dark:text-white transition-all duration-300">
+          <ThemeProvider attribute="class" enableSystem defaultTheme="system">
+            <Header />
+            {children}
+            <Footer />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

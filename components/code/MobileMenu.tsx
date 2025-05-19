@@ -6,6 +6,7 @@ import SideMenu from "./SideMenu";
 
 const MobileMenu = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <div className="flex justify-center items-center">
       <div onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
@@ -14,10 +15,10 @@ const MobileMenu = () => {
           size={30}
         />
         <div className="md:hidden">
-          <SideMenu>
+          <SideMenu
             isOpen={isSidebarOpen}
             onClose={() => setIsSidebarOpen(false)}
-          </SideMenu>
+          />
         </div>
       </div>
     </div>

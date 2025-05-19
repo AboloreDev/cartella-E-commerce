@@ -1,14 +1,17 @@
 import React from "react";
 import { Button } from "../ui/button";
+import { SignInButton } from "@clerk/nextjs";
 
 const Login = () => {
   return (
-    <Button
-      variant="outline"
-      className="text-sm p-2 font-semibold hoverEffect hover:bg-slate-700 dark:hover:bg-white hover:text-white dark:hover:text-black cursor-pointer"
-    >
-      Login
-    </Button>
+    <SignInButton mode="modal">
+      <Button
+        variant="outline"
+        className="text-sm p-2 font-semibold hoverEffect cursor-pointer"
+      >
+        Login
+      </Button>
+    </SignInButton>
   );
 };
 

@@ -1,7 +1,6 @@
 import React from "react";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { Twitter, Linkedin, Github } from "lucide-react";
 import { Tooltip, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { Link } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { TooltipContent } from "@radix-ui/react-tooltip";
 
@@ -15,17 +14,17 @@ const Socials = [
   {
     title: "Github",
     href: "https://www.github.com/aboloredev",
-    icon: <FaGithub className="w-5 h-5" />,
+    icon: <Github className="w-5 h-5" />,
   },
   {
     title: "LinkedIn",
     href: "https://www.linkedin.com/alabifathiu",
-    icon: <FaLinkedin className="w-5 h-5" />,
+    icon: <Linkedin className="w-5 h-5" />,
   },
   {
     title: "Twitter",
     href: "https://www.twitter.com/abolorreeeee",
-    icon: <FaTwitter className="w-5 h-5" />,
+    icon: <Twitter className="w-5 h-5" />,
   },
 ];
 
@@ -36,24 +35,34 @@ const SocialLinks = ({
 }: SocialsProps) => {
   return (
     <TooltipProvider>
-      <div className={cn("flex items-center gap-4", className)}>
+      <div
+        className={cn(
+          "flex items-center gap-4  text-white dark:text-black",
+          className
+        )}
+      >
         {Socials.map((links) => (
           <Tooltip key={links.title}>
             <TooltipTrigger asChild>
-              <Link
+              <a
                 key={links.title}
                 target="_blank"
-                // rel="noopener noreferrer"
+                rel="noopener noreferrer"
                 href={links.href}
                 className={cn(
-                  "p-2 border-2 rounded-full hoverEffect",
+                  "p-2 border-2 border-white dark:border-black rounded-full hoverEffect text-white dark:text-black",
                   iconClassName
                 )}
               >
                 {links.icon}
-              </Link>
+              </a>
             </TooltipTrigger>
-            <TooltipContent className={cn("font-semibold", tooltipClassName)}>
+            <TooltipContent
+              className={cn(
+                "font-semibold text-sm text-white dark:text-black",
+                tooltipClassName
+              )}
+            >
               {links.title}
             </TooltipContent>
           </Tooltip>

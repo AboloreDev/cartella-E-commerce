@@ -21,25 +21,28 @@ const SideMenu: FC<Sidebar> = ({ isOpen, onClose }) => {
     <div
       className={`fixed inset-y-0 h-screen left-0 z-50 w-full bg-black/50 shadow-xl ${
         isOpen ? "translate-x-0" : "-translate-x-full"
-      } hoverEffect`}
+      }`}
     >
       <div
         ref={SidebarRef}
         className="min-w-72 max-w-96 bg-black h-screen dark:bg-white p-8 flex flex-col gap-6"
       >
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center  text-white dark:text-black justify-between gap-3">
           <Logo />
-          <button className="hoverRffect cursor-pointer" onClick={onClose}>
+          <button
+            className="hoverRffect cursor-pointer text-white dark:text-black"
+            onClick={onClose}
+          >
             <X />
           </button>
         </div>
-        <div className="flex flex-col space-y-4 font-semibold tracking-wide">
+        <div className="flex  text-white dark:text-black flex-col space-y-4 font-semibold tracking-wide mb-8">
           {NavHeaderLinks.map((links, index) => (
             <Link
               href={links.href}
               key={index}
-              className={`${
-                pathname === links.href && "text-slate-900 dark:text-white"
+              className={`hoverEffect ${
+                pathname === links.href && "text-white dark:text-black"
               }`}
             >
               {links.title}
