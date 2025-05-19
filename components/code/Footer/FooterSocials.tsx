@@ -1,6 +1,6 @@
 import React from "react";
 import { Twitter, Linkedin, Github } from "lucide-react";
-import { Tooltip, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { Tooltip, TooltipProvider, TooltipTrigger } from "../../ui/tooltip";
 import { cn } from "@/lib/utils";
 import { TooltipContent } from "@radix-ui/react-tooltip";
 
@@ -28,7 +28,7 @@ const Socials = [
   },
 ];
 
-const SocialLinks = ({
+const FooterSocials = ({
   className,
   iconClassName,
   tooltipClassName,
@@ -37,7 +37,7 @@ const SocialLinks = ({
     <TooltipProvider>
       <div
         className={cn(
-          "flex items-center gap-4  text-white dark:text-black",
+          "flex items-center gap-4 text-black dark:text-white",
           className
         )}
       >
@@ -50,7 +50,7 @@ const SocialLinks = ({
                 rel="noopener noreferrer"
                 href={links.href}
                 className={cn(
-                  "p-2 border-2 border-white dark:border-black rounded-full hoverEffect text-white dark:text-black",
+                  "p-1 border-2 border-slate-900 dark:border-slate-400 rounded-full hoverEffect text-slate-900 dark:text-slate-400",
                   iconClassName
                 )}
               >
@@ -59,7 +59,7 @@ const SocialLinks = ({
             </TooltipTrigger>
             <TooltipContent
               className={cn(
-                "font-semibold text-sm text-white dark:text-black",
+                "font-semibold text-sm text-slate-900 dark:text-slate-400",
                 tooltipClassName
               )}
             >
@@ -72,4 +72,4 @@ const SocialLinks = ({
   );
 };
 
-export default SocialLinks;
+export default FooterSocials;

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/code/Header";
-import Footer from "@/components/code/Footer";
+import Header from "@/components/code/Navbar/Header";
+import Footer from "@/components/code/Footer/Footer";
 import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -21,7 +21,7 @@ export default function RootLayout({
         <body className="nunito antialiased bg-white dark:bg-black text-black dark:text-white transition-all duration-300">
           <ThemeProvider attribute="class" enableSystem defaultTheme="system">
             <Header />
-            {children}
+            <main className="min-h-screen">{children}</main>
             <Footer />
           </ThemeProvider>
         </body>

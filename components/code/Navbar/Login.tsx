@@ -1,6 +1,7 @@
 import React from "react";
-import { Button } from "../ui/button";
+
 import { SignInButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 const Login = () => {
   return (

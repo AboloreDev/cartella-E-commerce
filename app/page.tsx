@@ -1,7 +1,13 @@
 import Container from "@/components/code/Container";
+import Hero from "@/components/code/Homepage/Hero";
 
 const Home = () => {
-  return <Container className="">page</Container>;
+  return (
+    <>
+      <Hero />
+      <Container className="">Home</Container>
+    </>
+  );
 };
 
 export default Home;

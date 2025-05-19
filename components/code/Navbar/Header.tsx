@@ -1,11 +1,11 @@
 import React from "react";
-import Container from "./Container";
+import Container from "../Container";
 import Logo from "./Logo";
 import NavLinks from "./NavLinks";
 import SearchBar from "./SearchBar";
 import Favorite from "./Favorite";
 import CartIcon from "./CartIcon";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "../ThemeToggle";
 
 import MobileMenu from "./MobileMenu";
 import { currentUser } from "@clerk/nextjs/server";

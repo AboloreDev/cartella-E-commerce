@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import LogoImage from "../../app/favicon.ico";
+import LogoImage from "../../../app/favicon.ico";
 import { cn } from "@/lib/utils";
 
 const Logo = ({ className }: { className?: string }) => {
