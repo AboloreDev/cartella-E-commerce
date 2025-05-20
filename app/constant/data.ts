@@ -1,19 +1,19 @@
 export const NavHeaderLinks = [
   { title: "Home", href: "/" },
-  { title: "Store", href: "/pages/store" },
-  { title: "Blog", href: "/pages/blog" },
-  { title: "Contact", href: "/pages/contact" },
-  { title: "Trending", href: "/pages/trending" },
+  { title: "Store", href: "/store" },
+  { title: "Blog", href: "/blog" },
+  { title: "Contact", href: "/contact" },
+  { title: "Trending", href: "/trending" },
 ];
 
 // Quick footer links
 export const quickFooterLinks = [
-  { title: "About Us", href: "/pages/about" },
-  { title: "Contact Us", href: "/pages/contact" },
-  { title: "Terms and Conditions", href: "/pages/terms" },
-  { title: "Privacy Policy", href: "/pages/privacy" },
-  { title: "FAQ's", href: "/pages/faq" },
-  { title: "Help", href: "/pages/help" },
+  { title: "About Us", href: "/about" },
+  { title: "Contact Us", href: "/contact" },
+  { title: "Terms and Conditions", href: "/terms" },
+  { title: "Privacy Policy", href: "/privacy" },
+  { title: "FAQ's", href: "/faq" },
+  { title: "Help", href: "/help" },
 ];
 
 // categories for footer

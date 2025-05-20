@@ -1,31 +1,11 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Header from "@/components/code/Navbar/Header";
-import Footer from "@/components/code/Footer/Footer";
-import { ThemeProvider } from "next-themes";
-import { ClerkProvider } from "@clerk/nextjs";
-
-export const metadata: Metadata = {
-  title: "Cartella Store",
-  description: "The No 1 Online Store",
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className="nunito antialiased bg-white dark:bg-black text-black dark:text-white transition-all duration-300">
+        {children}
+      </body>
+    </html>
+  );
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className="nunito antialiased bg-white dark:bg-black text-black dark:text-white transition-all duration-300">
-          <ThemeProvider attribute="class" enableSystem defaultTheme="system">
-            <Header />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
-  );
-}
+export default RootLayout;
