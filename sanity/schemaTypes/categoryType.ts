@@ -1,9 +1,9 @@
-import { TagIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
+import { TagIcon } from "@sanity/icons";
 
 export const categoryType = defineType({
   name: "category",
-  title: "category",
+  title: "Category",
   type: "document",
   icon: TagIcon,
   fields: [
@@ -24,13 +24,11 @@ export const categoryType = defineType({
     defineField({
       name: "description",
       type: "text",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "range",
       type: "number",
       description: "Starting from",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "featured",
@@ -39,12 +37,11 @@ export const categoryType = defineType({
     }),
     defineField({
       name: "image",
-      type: "image",
       title: "Category Image",
+      type: "image",
       options: {
         hotspot: true,
       },
-      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {

@@ -1,95 +1,70 @@
-import { IoDocument } from "react-icons/io5";
-import { defineType, defineField, defineArrayMember } from "sanity";
+import { DocumentTextIcon } from "@sanity/icons";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const blogType = defineType({
   name: "blog",
-  title: "Blog Post",
+  title: "Blog",
   type: "document",
-  icon: IoDocument,
+  icon: DocumentTextIcon,
   fields: [
     defineField({
       name: "title",
-      title: "Title",
       type: "string",
-      validation: (Rule) => Rule.required().min(5).max(100),
     }),
     defineField({
       name: "slug",
-      title: "Slug",
       type: "slug",
       options: {
         source: "title",
-        maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "author",
-      title: "Author",
       type: "reference",
-      to: [{ type: "author" }],
-      validation: (Rule) => Rule.required(),
+      to: { type: "author" },
     }),
     defineField({
       name: "mainImage",
-      title: "Main Image",
       type: "image",
       options: {
         hotspot: true,
       },
-      validation: (Rule) => Rule.required(),
-      fields: [
-        {
-          name: "alt",
-          type: "string",
-          title: "Alternative text",
-          validation: (Rule) => Rule.required(),
-          description: "Important for SEO and accessibility",
-        },
-      ],
     }),
     defineField({
-      name: "categories",
-      title: "Categories",
+      name: "blogcategories",
       type: "array",
       of: [
-        defineArrayMember({ type: "reference", to: [{ type: "category" }] }),
+        defineArrayMember({ type: "reference", to: { type: "blogcategory" } }),
       ],
-      validation: (Rule) => Rule.min(1).required(),
     }),
     defineField({
       name: "publishedAt",
-      title: "Published At",
       type: "datetime",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "isLatest",
       title: "Latest Blog",
-      type: "boolesn",
-      description: "Toggje to latest on or off",
+      type: "boolean",
+      description: "Toggle to Latest on or off",
       initialValue: true,
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "body",
       type: "blockContent",
     }),
   ],
-
   preview: {
     select: {
       title: "title",
       author: "author.name",
       media: "mainImage",
-      publishedAt: "publishedAt",
+      isLatest: "isLatest",
     },
     prepare(selection) {
-      const { title, author, media, publishedAt } = selection;
+      const { author, isLatest } = selection;
       return {
-        title: title,
-        subtitle: author && `${publishedAt ? "Latest| " : ""} by ${author}`,
-        media: media,
+        ...selection,
+        subtitle: author && `${isLatest ? "Latest | " : ""} By ${author}`,
       };
     },
   },

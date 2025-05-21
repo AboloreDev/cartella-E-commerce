@@ -26,3 +26,12 @@ export const footerCategories = [
   { title: "Bags", href: "bags" },
   { title: "Caps", href: "caps" },
 ];
+
+// Product type
+export const productType = [
+  { title: "Men", value: "men" },
+  { title: "Women", value: "women" },
+  { title: "Bags", value: "bags" },
+  { title: "Shoes", value: "shoes" },
+  { title: "Jewelries", value: "jewelries" },
+];

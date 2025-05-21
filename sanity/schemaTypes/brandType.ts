@@ -1,5 +1,5 @@
-import { TagIcon } from "lucide-react";
-import { defineType, defineField } from "sanity";
+import { TagIcon } from "@sanity/icons";
+import { defineField, defineType } from "sanity";
 
 export const brandType = defineType({
   name: "brand",
@@ -8,57 +8,35 @@ export const brandType = defineType({
   icon: TagIcon,
   fields: [
     defineField({
-      name: "name",
-      title: "Brand Name",
+      name: "title",
       type: "string",
-      validation: (Rule) => Rule.required().min(2).max(50),
     }),
     defineField({
       name: "slug",
-      title: "Slug",
       type: "slug",
       options: {
-        source: "name",
-        maxLength: 96,
+        source: "title",
       },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "logo",
-      title: "Brand Logo",
+      name: "description",
+      type: "text",
+    }),
+    defineField({
+      name: "image",
+      title: "Brand Image",
       type: "image",
       options: {
         hotspot: true,
       },
-      fields: [
-        {
-          name: "alt",
-          type: "string",
-          title: "Alternative Text",
-          validation: (Rule) => Rule.required(),
-        },
-      ],
-    }),
-    defineField({
-      name: "description",
-      title: "Description",
-      type: "text",
-      rows: 3,
-      validation: (Rule) => Rule.max(300),
     }),
   ],
-
   preview: {
     select: {
-      title: "name",
-      media: "logo",
-    },
-    prepare(selection) {
-      const { title, media } = selection;
-      return {
-        title: title,
-        media: media,
-      };
+      title: "title",
+      subtitle: "description",
+      media: "image",
     },
   },
 });

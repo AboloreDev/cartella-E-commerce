@@ -1,5 +1,5 @@
-import { HomeIcon } from "lucide-react";
-import { defineType, defineField } from "sanity";
+import { HomeIcon } from "@sanity/icons";
+import { defineField, defineType } from "sanity";
 
 export const addressType = defineType({
   name: "address",
@@ -8,16 +8,11 @@ export const addressType = defineType({
   icon: HomeIcon,
   fields: [
     defineField({
-      name: "fullName",
-      title: "Full Name",
+      name: "name",
+      title: "Address Name",
       type: "string",
+      description: "A friendly name for this address (e.g. Home, Work)",
       validation: (Rule) => Rule.required().max(50),
-    }),
-    defineField({
-      name: "phoneNumber",
-      title: "Phone Number",
-      type: "string",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "email",
@@ -25,10 +20,11 @@ export const addressType = defineType({
       type: "email",
     }),
     defineField({
-      name: "streetAddress",
+      name: "address",
       title: "Street Address",
       type: "string",
-      validation: (Rule) => Rule.required().max(50),
+      description: "The street address including apartment/unit number",
+      validation: (Rule) => Rule.required().min(5).max(100),
     }),
     defineField({
       name: "city",
@@ -38,44 +34,40 @@ export const addressType = defineType({
     }),
     defineField({
       name: "state",
-      title: "State / Province",
+      title: "State",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      description: "Two letter state code (e.g. NY, CA)",
+      validation: (Rule) => Rule.required().length(2).uppercase(),
     }),
     defineField({
-      name: "postalCode",
-      title: "Postal Code",
+      name: "zip",
+      title: "ZIP Code",
       type: "string",
       description: "Format: 12345 or 12345-6789",
       validation: (Rule) =>
         Rule.required()
-          .regex(/^[A-Za-z0-9 -]{4,10}$/, {
-            name: "postalCode",
+          .regex(/^\d{5}(-\d{4})?$/, {
+            name: "zipCode",
             invert: false,
           })
-          .custom((postalCode: string | undefined) => {
-            if (!postalCode) {
-              return "Postal Code is required";
+          .custom((zip: string | undefined) => {
+            if (!zip) {
+              return "ZIP code is required";
             }
-            if (!postalCode.match(/^[A-Za-z0-9 -]{4,10}$/)) {
-              return "Please enter a valid Postal Code (e.g. 12345 or 12345-6789)";
+            if (!zip.match(/^\d{5}(-\d{4})?$/)) {
+              return "Please enter a valid ZIP code (e.g. 12345 or 12345-6789)";
             }
             return true;
           }),
     }),
     defineField({
-      name: "country",
-      title: "Country",
-      type: "string",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "isDefault",
+      name: "default",
       title: "Default Address",
       type: "boolean",
-      description: "Is this the shipping address",
+      description: "Is this the default shipping address?",
       initialValue: false,
     }),
+
     defineField({
       name: "createdAt",
       title: "Created At",
@@ -83,21 +75,18 @@ export const addressType = defineType({
       initialValue: () => new Date().toISOString(),
     }),
   ],
-
   preview: {
     select: {
-      title: "fullName",
+      title: "name",
       subtitle: "address",
       city: "city",
       state: "state",
-      country: "country",
-      isDefault: "isDefault",
+      isDefault: "default",
     },
-    prepare(selection) {
-      const { title, state, country, city, isDefault, subtitle } = selection;
+    prepare({ title, subtitle, city, state, isDefault }) {
       return {
-        title: `${title} ${isDefault ? "(Default)" : ""},`,
-        subtitle: `${subtitle}, ${city}, ${state}, ${country}`,
+        title: `${title} ${isDefault ? "(Default)" : ""}`,
+        subtitle: `${subtitle}, ${city}, ${state}`,
       };
     },
   },

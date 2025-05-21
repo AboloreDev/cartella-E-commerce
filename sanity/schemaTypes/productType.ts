@@ -1,112 +1,69 @@
-import { ShoppingBag } from "lucide-react";
-import { defineType, defineField } from "sanity";
+import { TrolleyIcon } from "@sanity/icons";
+import { defineField, defineType } from "sanity";
 
 export const productType = defineType({
   name: "product",
-  title: "Product",
+  title: "Products",
   type: "document",
-  icon: ShoppingBag,
+  icon: TrolleyIcon,
   fields: [
     defineField({
-      name: "title",
-      title: "Product Title",
+      name: "name",
+      title: "Product Name",
       type: "string",
-      validation: (Rule) => Rule.required().min(3).max(100),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
       options: {
-        source: "title",
+        source: "name",
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "description",
-      title: "Description",
-      type: "array",
-      of: [{ type: "block" }],
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "price",
-      title: "Price (USD)",
-      type: "number",
-      validation: (Rule) => Rule.required().min(0),
-    }),
-    defineField({
-      name: "discountPrice",
-      title: "Discount Price (optional)",
-      type: "number",
-      validation: (Rule) => Rule.required().min(0),
     }),
     defineField({
       name: "images",
       title: "Product Images",
       type: "array",
       of: [{ type: "image", options: { hotspot: true } }],
-      validation: (Rule) => Rule.required().min(1).max(6),
     }),
     defineField({
-      name: "category",
-      title: "Category",
+      name: "description",
+      title: "Description",
+      type: "string",
+    }),
+    defineField({
+      name: "price",
+      title: "Price",
+      type: "number",
+      validation: (Rule) => Rule.required().min(0),
+    }),
+    defineField({
+      name: "discount",
+      title: "Discount",
+      type: "number",
+      validation: (Rule) => Rule.required().min(0),
+    }),
+    defineField({
+      name: "categories",
+      title: "Categories",
       type: "array",
       of: [{ type: "reference", to: { type: "category" } }],
-      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "stock",
+      title: "Stock",
+      type: "number",
+      validation: (Rule) => Rule.min(0),
     }),
     defineField({
       name: "brand",
       title: "Brand",
       type: "reference",
-      to: [{ type: "brand" }],
+      to: { type: "brand" },
     }),
-    defineField({
-      name: "inStock",
-      title: "In Stock",
-      type: "number",
-      validation: (Rule) => Rule.required().min(0),
-    }),
-    defineField({
-      name: "status",
-      title: "Product Status",
-      type: "string",
-      options: {
-        list: [
-          { title: "New", value: "new" },
-          { title: "Hot", value: "hot" },
-          { title: "Sale", value: "sale" },
-        ],
-      },
-    }),
-    defineField({
-      name: "variant",
-      title: "Product Type",
-      type: "string",
-      options: {
-        list: [
-          { title: "T-shirt", value: "tshirt" },
-          { title: "Jeans", value: "jeans" },
-          { title: "Hoodie", value: "hoodie" },
-          { title: "Dress", value: "dress" },
-          { title: "Jacket", value: "jacket" },
-          { title: "Sweater", value: "sweater" },
-          { title: "Skirt", value: "skirt" },
-          { title: "Shorts", value: "shorts" },
-          { title: "Sneakers", value: "sneakers" },
-          { title: "Heels", value: "heels" },
-          { title: "Boots", value: "boots" },
-          { title: "Sandals", value: "sandals" },
-          { title: "Cap", value: "cap" },
-          { title: "Bag", value: "bag" },
-          { title: "Accessories", value: "accessories" },
-          { title: "Others", value: "others" },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-
     defineField({
       name: "sizes",
       title: "Available Sizes",
@@ -126,26 +83,54 @@ export const productType = defineType({
         layout: "tags",
       },
     }),
+
+    defineField({
+      name: "status",
+      title: "Product Status",
+      type: "string",
+      options: {
+        list: [
+          { title: "New", value: "new" },
+          { title: "Hot", value: "hot" },
+          { title: "Sale", value: "sale" },
+        ],
+      },
+    }),
+    defineField({
+      name: "variant",
+      title: "Product Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Men", value: "men" },
+          { title: "Women", value: "women" },
+          { title: "Bags", value: "bags" },
+          { title: "Shoes", value: "shoes" },
+          { title: "Jewelries", value: "jewelries" },
+          { title: "Others", value: "others" },
+        ],
+      },
+    }),
     defineField({
       name: "isFeatured",
       title: "Featured Product",
       type: "boolean",
+      description: "Toggle to Featured on or off",
       initialValue: false,
     }),
   ],
-
   preview: {
     select: {
-      title: "title",
+      title: "name",
       media: "images",
-      price: "price",
+      subtitle: "price",
     },
     prepare(selection) {
-      const { title, media, price } = selection;
+      const { title, subtitle, media } = selection;
       const image = media && media[0];
       return {
-        title,
-        subtitle: `$${price}`,
+        title: title,
+        subtitle: `$${subtitle}`,
         media: image,
       };
     },

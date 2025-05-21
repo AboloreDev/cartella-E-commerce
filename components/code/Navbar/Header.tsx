@@ -14,10 +14,9 @@ import Login from "./Login";
 
 const Header = async () => {
   const user = await currentUser();
-  console.log(user);
 
   return (
-    <header className="py-3">
+    <header className="py-3 sticky top-0 z-50 backdrop-blur-md">
       <Container className="flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-3 flex-row-reverse md:gap-0">
