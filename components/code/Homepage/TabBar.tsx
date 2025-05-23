@@ -9,22 +9,27 @@ interface TabBarProps {
 }
 
 const TabBar = ({ selectedTab, onSelectedTab }: TabBarProps) => {
-  console.log(selectedTab);
   return (
-    <div className="flex justify-between items-center flex-wrap">
-      <div className="flex gap-2 items-center">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center flex-wrap gap-4 sm:gap-2 mb-4">
+      <div className="flex flex-wrap gap-2">
         {productType.map((product, index) => (
           <Button
             onClick={() => onSelectedTab(product.title)}
             key={index}
-            className={`cursor-pointer font-semibold ${selectedTab === product.title ? "bg-slate-700 text-white dark:bg-slate-400 dark:text-black" : ""}`}
+            className={`cursor-pointer font-semibold ${
+              selectedTab === product.title
+                ? "bg-slate-700 text-white dark:bg-slate-400 dark:text-black"
+                : ""
+            }`}
           >
             {product.title}
           </Button>
         ))}
       </div>
       <Link href={"/store"}>
-        <Button className="cursor-pointer font-semibold">See All</Button>
+        <Button className="cursor-pointer font-semibold w-full sm:w-auto">
+          See All
+        </Button>
       </Link>
     </div>
   );

@@ -40,7 +40,7 @@ const ProductGrid = () => {
     <div>
       <TabBar selectedTab={selectedTab} onSelectedTab={setSelectedTab} />
       {loading ? (
-        <div className="flex flex-col items-center py-10 min-h-80 justify-center gap-4 w-full mt-10 bg-gray-200 dark:bg-slate-800">
+        <div className="flex flex-col items-center py-10 min-h-80 justify-center gap-4 w-full mt-10 bg-gray-50 dark:bg-slate-950">
           <div className="space-x-2 flex items-center">
             <Loader2 className="w-5 h-5 animate-spin" />
             <span>Product is loading...</span>

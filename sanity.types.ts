@@ -405,3 +405,160 @@ export type Slug = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Order | Product | Address | Blogcategory | BlockContent | Blog | Author | Brand | Category | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./sanity/queries/query.ts
+// Variable: BRAND_QUERY
+// Query: *[_type=="brand"] | order(name asc)
+export type BRAND_QUERYResult = Array<{
+  _id: string;
+  _type: "brand";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+}>;
+// Variable: LATEST_BLOG
+// Query: *[_type=="blog" && isLatest == true] | order(name asc){    ...,    blogcategories[]->{title}}
+export type LATEST_BLOGResult = Array<{
+  _id: string;
+  _type: "blog";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  author?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "author";
+  };
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  blogcategories: Array<{
+    title: string | null;
+  }> | null;
+  publishedAt?: string;
+  isLatest?: boolean;
+  body?: BlockContent;
+}>;
+// Variable: TRENDING_PRODUCTS
+// Query: *[_type=="product" && status == "hot"] | order(name asc){    ...,    "categories": categories[]->title  }
+export type TRENDING_PRODUCTSResult = Array<{
+  _id: string;
+  _type: "product";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  description?: string;
+  price?: number;
+  discount?: number;
+  categories: Array<string | null> | null;
+  stock?: number;
+  brand?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "brand";
+  };
+  sizes?: Array<string>;
+  colors?: Array<string>;
+  status?: "hot" | "new" | "sale";
+  variant?: "bags" | "jewelries" | "men" | "others" | "shoes" | "women";
+  isFeatured?: boolean;
+}>;
+// Variable: GET_SINGLE_PRODUCT
+// Query: *[_type=="product" && slug.current == $slug] | order(name asc)[0]
+export type GET_SINGLE_PRODUCTResult = {
+  _id: string;
+  _type: "product";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  description?: string;
+  price?: number;
+  discount?: number;
+  categories?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
+  stock?: number;
+  brand?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "brand";
+  };
+  sizes?: Array<string>;
+  colors?: Array<string>;
+  status?: "hot" | "new" | "sale";
+  variant?: "bags" | "jewelries" | "men" | "others" | "shoes" | "women";
+  isFeatured?: boolean;
+} | null;
+
+// Query TypeMap
+import "@sanity/client";
+declare module "@sanity/client" {
+  interface SanityQueries {
+    "*[_type==\"brand\"] | order(name asc)": BRAND_QUERYResult;
+    "*[_type==\"blog\" && isLatest == true] | order(name asc){\n    ...,\n    blogcategories[]->{title}\n}": LATEST_BLOGResult;
+    "*[_type==\"product\" && status == \"hot\"] | order(name asc){\n    ...,\n    \"categories\": categories[]->title\n  }": TRENDING_PRODUCTSResult;
+    "*[_type==\"product\" && slug.current == $slug] | order(name asc)[0]": GET_SINGLE_PRODUCTResult;
+  }
+}
