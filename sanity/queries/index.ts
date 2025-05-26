@@ -1,6 +1,7 @@
 import { sanityFetch } from "../lib/live";
 import {
   BRAND_QUERY,
+  BRANDS_QUERY,
   GET_SINGLE_PRODUCT,
   LATEST_BLOG,
   TRENDING_PRODUCTS,
@@ -30,7 +31,7 @@ export const getCategories = async (quantity?: number) => {
 
 export const getAllBrands = async () => {
   try {
-    const query = BRAND_QUERY;
+    const query = BRANDS_QUERY;
     const { data } = await sanityFetch({ query });
     return data ?? [];
   } catch (error) {
@@ -68,6 +69,17 @@ export const getSingleProduct = async (slug: string) => {
     return data ?? null;
   } catch (error) {
     console.log("Error fetching single product", error);
+    return null;
+  }
+};
+
+export const getBrandQuery = async (slug: string) => {
+  try {
+    const query = BRAND_QUERY;
+    const { data } = await sanityFetch({ query, params: { slug } });
+    return data ?? null;
+  } catch (error) {
+    console.log("Error fetching single Brand", error);
     return null;
   }
 };

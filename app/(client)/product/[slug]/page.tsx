@@ -1,7 +1,6 @@
 import Container from "@/components/code/Container";
 import ProductImageView from "@/components/code/ProductImageView";
 import SingleProductDetails from "@/components/code/SingleProductDetails";
-import { Product } from "@/sanity.types";
 import { getSingleProduct } from "@/sanity/queries";
 import React from "react";
 
@@ -11,9 +10,7 @@ const SingleProductPage = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const product: Product | null = await getSingleProduct(slug);
-
-  console.log(product);
+  const product = await getSingleProduct(slug);
 
   if (!product) {
     return (

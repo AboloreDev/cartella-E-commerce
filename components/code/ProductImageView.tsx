@@ -12,19 +12,19 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 
 interface ProductImageViewProps {
-  images: Array<{
-    asset: {
+  images?: Array<{
+    asset?: {
       _ref: string;
       _type: "reference";
-      _weak: boolean;
-      [internalGroqTypeReferenceTo]: "sanity.imageAsset";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
-    hotspot: SanityImageHotspot;
-    crop: SanityImageCrop;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
     _type: "image";
     _key: string;
   }>;
-  isStock: number;
+  isStock?: number | boolean;
 }
 const ProductImageView = ({ images = [], isStock }: ProductImageViewProps) => {
   const [activeImage, setActiveImage] = useState(images[0]);

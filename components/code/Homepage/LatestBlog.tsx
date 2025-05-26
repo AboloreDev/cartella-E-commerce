@@ -1,4 +1,3 @@
-import { Blog } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import { getLatestBlogs } from "@/sanity/queries";
 import Image from "next/image";
@@ -8,7 +7,7 @@ import { Calendar } from "lucide-react";
 import dayjs from "dayjs";
 
 const LatestBlog = async () => {
-  const blogs: Blog[] = await getLatestBlogs();
+  const blogs = await getLatestBlogs();
 
   return (
     <div className="mb-10 px-4 sm:px-6 lg:px-8">
@@ -51,7 +50,7 @@ const LatestBlog = async () => {
                     key={idx}
                     className="font-semibold tracking-wide text-slate-700 dark:text-slate-300"
                   >
-                    {item._ref}
+                    {item.title}
                   </p>
                 ))}
               </div>

@@ -6,6 +6,7 @@ import React from "react";
 
 const Trending = async () => {
   const trendingProducts: Product[] = await getTrendingProducts();
+
   return (
     <Container>
       <div className="py-10">

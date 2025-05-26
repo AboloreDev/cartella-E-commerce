@@ -46,7 +46,7 @@ const ShopByBrands = async () => {
       <div className="mt-5 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5  gap-2  bg-slate-50 dark:bg-slate-950 p-4">
         {brands.map((brand, index) => (
           <Link
-            href={`brand/${brand.slug?.current}`}
+            href={{ pathname: "/store", query: { brand: brand.slug?.current } }}
             key={index}
             className="verflow-hidden relative mb-2 flex items-center justify-center rounded-md hoverEffect"
           >
