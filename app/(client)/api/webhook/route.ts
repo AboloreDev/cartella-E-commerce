@@ -92,7 +92,7 @@ const createOrderInSanity = async (
   const sanityProducts = [];
   const stockUpdates = [];
   for (const item of lineItemsProducts.data) {
-    const productId = (item.price?.product as Stripe.Product)?.metadata?._id;
+    const productId = (item.price?.product as Stripe.Product)?.metadata?.id;
     const quantity = item?.quantity || 0;
 
     if (!productId) continue;
