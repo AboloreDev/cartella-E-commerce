@@ -12,7 +12,7 @@ const PriceFormatter = ({ amount, className }: Props) => {
     minimumFractionDigits: 2,
   });
   return (
-    <span className={cn("text-sm font-semibold text-darkColor", className)}>
+    <span className={cn("text-sm font-semibold", className)}>
       {formattedPrice}
     </span>
   );

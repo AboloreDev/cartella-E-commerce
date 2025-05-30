@@ -70,7 +70,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             <p className="text-sm text-gray-600 dark:text-gray-400">
               ${product.price}
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col items-start gap-1">
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, index) => (
                   <StarIcon

@@ -106,7 +106,14 @@ export type Order = {
     address?: string;
     name?: string;
   };
-  status?: "pending" | "processing" | "paid" | "shipped" | "out_for_delivery" | "delivered" | "cancelled";
+  status?:
+    | "pending"
+    | "processing"
+    | "paid"
+    | "shipped"
+    | "out_for_delivery"
+    | "delivered"
+    | "cancelled";
   orderDate?: string;
 };
 
@@ -182,37 +189,40 @@ export type Blogcategory = {
   description?: string;
 };
 
-export type BlockContent = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-  listItem?: "bullet";
-  markDefs?: Array<{
-    href?: string;
-    _type: "link";
-    _key: string;
-  }>;
-  level?: number;
-  _type: "block";
-  _key: string;
-} | {
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-  };
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
-  _type: "image";
-  _key: string;
-}>;
+export type BlockContent = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+      listItem?: "bullet";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+      _key: string;
+    }
+>;
 
 export type Blog = {
   _id: string;
@@ -403,7 +413,27 @@ export type Slug = {
   source?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Order | Product | Address | Blogcategory | BlockContent | Blog | Author | Brand | Category | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug;
+export type AllSanitySchemaTypes =
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityFileAsset
+  | Geopoint
+  | Order
+  | Product
+  | Address
+  | Blogcategory
+  | BlockContent
+  | Blog
+  | Author
+  | Brand
+  | Category
+  | SanityImageCrop
+  | SanityImageHotspot
+  | SanityImageAsset
+  | SanityAssetSourceData
+  | SanityImageMetadata
+  | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/queries/query.ts
 // Variable: BRAND_QUERY
@@ -556,9 +586,9 @@ export type GET_SINGLE_PRODUCTResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type==\"brand\"] | order(name asc)": BRAND_QUERYResult;
-    "*[_type==\"blog\" && isLatest == true] | order(name asc){\n    ...,\n    blogcategories[]->{title}\n}": LATEST_BLOGResult;
-    "*[_type==\"product\" && status == \"hot\"] | order(name asc){\n    ...,\n    \"categories\": categories[]->title\n  }": TRENDING_PRODUCTSResult;
-    "*[_type==\"product\" && slug.current == $slug] | order(name asc)[0]": GET_SINGLE_PRODUCTResult;
+    '*[_type=="brand"] | order(name asc)': BRAND_QUERYResult;
+    '*[_type=="blog" && isLatest == true] | order(name asc){\n    ...,\n    blogcategories[]->{title}\n}': LATEST_BLOGResult;
+    '*[_type=="product" && status == "hot"] | order(name asc){\n    ...,\n    "categories": categories[]->title\n  }': TRENDING_PRODUCTSResult;
+    '*[_type=="product" && slug.current == $slug] | order(name asc)[0]': GET_SINGLE_PRODUCTResult;
   }
 }

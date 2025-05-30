@@ -1,7 +1,7 @@
 import { CornerDownLeft, StarIcon, Truck } from "lucide-react";
 import React from "react";
 import Price from "./Price";
-import AddToCartButton from "./AddToCartButton";
+
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { FiShare2 } from "react-icons/fi";
 import { RxBorderSplit } from "react-icons/rx";
@@ -9,10 +9,11 @@ import { TbTruckDelivery } from "react-icons/tb";
 import Favorite from "./Navbar/Favorite";
 import { Product } from "@/sanity.types";
 import ProductCharacteristics from "./ProductCharacteristics";
+import AddToCartButton from "./AddToCartButton";
 
 const SingleProductDetails = ({ product }: { product: Product }) => {
   return (
-    <div>
+    <div className="min-h-[300px]">
       <div className="space-y-1">
         <h2 className="text-2xl font-bold">{product?.name}</h2>
         <p className="text-sm text-slate-400 tracking-wide">
@@ -30,6 +31,7 @@ const SingleProductDetails = ({ product }: { product: Product }) => {
           <p className="font-semibold">{`(100)`}</p>
         </div>
       </div>
+
       <div className="space-y-2 py-5">
         <Price
           price={product?.price}
@@ -43,15 +45,14 @@ const SingleProductDetails = ({ product }: { product: Product }) => {
         </p>
       </div>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 w-full">
-        <div className="w-full sm:flex-1">
-          <AddToCartButton product={product} className="w-full" />
-        </div>
+        <AddToCartButton product={product} />
         <div className="sm:ml-3 flex justify-end">
           <Favorite showProduct={true} product={product} />
         </div>
+        <ProductCharacteristics product={product} />
       </div>
 
-      <ProductCharacteristics product={product} />
+      {/* <ProductCharacteristics product={product} /> */}
       <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-b-gray-200 py-5 -mt-2">
         <div className="flex items-center gap-2 text-sm hoverEffect">
           <RxBorderSplit className="text-lg" />

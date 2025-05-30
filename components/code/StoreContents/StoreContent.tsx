@@ -125,7 +125,7 @@ const StoreContent = ({ categories, brands }: StoreContentProps) => {
       )}
 
       {/* Desktop Sidebar */}
-      <div className="hidden md:block md:sticky md:top-20 md:self-start md:h-[calc(100vh-160px)] md:overflow-y-auto md:min-w-64 pb-5 border-r scrollbar-hide">
+      <div className="hidden md:block md:sticky md:top-20 md:self-start md:h-[calc(100vh-160px)] md:overflow-y-auto md:min-w-42 pb-3 border-r scrollbar-hide">
         <StoreCategoriesList
           categories={categories}
           selectedCategory={selectedCategory}
@@ -152,7 +152,7 @@ const StoreContent = ({ categories, brands }: StoreContentProps) => {
             </motion.div>
           </div>
         ) : products.length ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-5">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5">
             {products.map((product) => (
               <AnimatePresence key={product._id}>
                 <motion.div
