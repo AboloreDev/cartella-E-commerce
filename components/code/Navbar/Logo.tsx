@@ -15,7 +15,7 @@ const Logo = ({ className }: { className?: string }) => {
 
       <h3
         className={cn(
-          "text-xl prata-regular font-semibold tracking-wide uppercase cursor-pointer",
+          "text-xl prata-regular font-semibold tracking-wide uppercase cursor-pointer hidden md:flex",
           className
         )}
       >
