@@ -4,7 +4,7 @@ import { Address } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import { CartItem } from "@/store";
 import Stripe from "stripe";
-const DOMAIN = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+const DOMAIN = process.env.NEXT_PUBLIC_APP_URL;
 
 export interface Metadata {
   orderNumber: string;

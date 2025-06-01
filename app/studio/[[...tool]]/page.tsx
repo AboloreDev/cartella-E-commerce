@@ -9,18 +9,11 @@
 
 import { NextStudio } from "next-sanity/studio";
 import config from "../../../sanity.config";
-import { RedirectToSignIn, useClerk } from "@clerk/nextjs";
 
 export const dynamic = "force-static";
 
 export { metadata, viewport } from "next-sanity/studio";
 
 export default function StudioPage() {
-  const { user } = useClerk();
-
-  // If the user is not authenticated, redirect to the Sign-In page
-  if (!user) {
-    return <RedirectToSignIn />;
-  }
   return <NextStudio config={config} />;
 }
