@@ -25,3 +25,17 @@ export const BRAND_QUERY = defineQuery(
   "brandName": brand->title
   }`
 );
+
+export const MY_ORDERS = defineQuery(
+  `*[_type == "order" && clerkUserId == $userId] | order(orderData desc) {...,products[] {..., product ->}}`
+);
+
+export const GET_ALL_BLOG = defineQuery(
+  `*[_type == 'blog'] | order(publishedAt desc) [0...$quantity]{
+  ...,blogCategories[]->{title}
+  }`
+);
+
+export const GET_SINGLE_BLOG = defineQuery(
+  `*[_type=="blog" && slug.current == $slug] | order(name asc)[0]`
+);

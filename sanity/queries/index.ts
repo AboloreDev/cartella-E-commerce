@@ -2,8 +2,11 @@ import { sanityFetch } from "../lib/live";
 import {
   BRAND_QUERY,
   BRANDS_QUERY,
+  GET_ALL_BLOG,
+  GET_SINGLE_BLOG,
   GET_SINGLE_PRODUCT,
   LATEST_BLOG,
+  MY_ORDERS,
   TRENDING_PRODUCTS,
 } from "./query";
 
@@ -80,6 +83,39 @@ export const getBrandQuery = async (slug: string) => {
     return data ?? null;
   } catch (error) {
     console.log("Error fetching single Brand", error);
+    return null;
+  }
+};
+
+export const getAllOrders = async (userId: string) => {
+  try {
+    const query = MY_ORDERS;
+    const orders = await sanityFetch({ query, params: { userId } });
+    return orders.data || null;
+  } catch (error) {
+    console.log("Error fetching orders", error);
+    return null;
+  }
+};
+
+export const getAllBlogs = async (quantity: number) => {
+  try {
+    const query = GET_ALL_BLOG;
+    const { data } = await sanityFetch({ query, params: { quantity } });
+    return data ?? [];
+  } catch (error) {
+    console.log("Error fetching orders", error);
+    return null;
+  }
+};
+
+export const getSingleBlog = async (slug: string) => {
+  try {
+    const query = GET_SINGLE_BLOG;
+    const { data } = await sanityFetch({ query, params: { slug } });
+    return data ?? null;
+  } catch (error) {
+    console.log("Error fetching single product", error);
     return null;
   }
 };
